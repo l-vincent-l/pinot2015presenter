@@ -1,0 +1,126 @@
+\documentclass{roadef}
+
+\begin{document}
+
+\title{Présenter une~liste~de~dates de~manière~lisible: complexité~et~algorithmes}
+
+% Le titre court
+\def\shorttitle{Présenter une~liste~de~dates de~manière~lisible}
+
+% Les auteurs et leur numéro d'affiliation
+\author{Guillaume Pinot\inst{1}}
+
+% Les affiliations (par ordre croissant des numéros d'affiliation) séparées par \and
+\institute{
+  Canal TP, 20 rue Hector Malot, 75012 Paris\\
+  \email{guillaume.pinot@canaltp.fr}
+}
+
+% Création de la page de titre
+\maketitle
+\thispagestyle{empty}
+
+% Les mots-clés
+\keywords{recherche opérationnelle, optimisation.}
+
+
+\section{Introduction}
+
+Canal TP
+
+navitia et navitia.io
+
+Dans navitia, nous fournissons les dates auxquelles circulent les
+véhicules.  Or, une liste de dates est peu lisible par un humain. Nous
+avons donc besoin de décrire sous forme condensé cette liste de dates.
+
+\section{Le problème}
+
+\subsection{Description du problème}
+
+En entrée du problème, nous avons donc une liste de dates.  En sortie,
+nous voulons écrire une phrase du genre \emph{du Lundi au Vendredi du
+  27 avril au 31 mai 2015 sauf les 1, 8, 14 et 25 mai et le 30 mai}.
+
+Notre résultat à notre problème doit donc décrire notre liste de dates
+avec:
+\begin{itemize}
+\item un rythme hebdomadaire (ex: du Lundi au Vendredi);
+\item une période de validité (ex: du 27 avril au 31 mai);
+\item une liste de date excluses (ex: sauf les 1, 8, 14 et 25 mai);
+\item une liste de dates incluses (ex: et le 6 mai).
+\end{itemize}
+
+Pour que notre description soit le plus simple possible, il faut
+minimiser le nombre d'exceptions (les dates excluses et incluses).
+
+Nous pouvons facilement transformer la liste de dates en succession de
+rythmes hebdomadaire. Pour notre exemple, cela donnerait:
+\begin{itemize}
+\item Semaines du 27 avril et du 4 mai: Du Lundi au Jeudi;
+\item Semaine du 11 mai: Du Lundi au Vendredi sauf Jeudi;
+\item Semaine du 18 mai: Du Lundi au Vendredi;
+\item Semaine du 25 mai: Du Mardi au Samedi.
+\end{itemize}
+
+Pour un rythme hebdomadaire donnée, il est facile de généré notre
+résultat.  Le problème est donc de trouver le rythme hebdomadaire
+journalier tel que le nombre d'exceptions soit minimal.
+
+\subsection{Modélisation mathématiques}
+
+rythme hebdomadaire -> chaînes de 0 et 1
+
+distance de Hamming
+
+modèle
+
+\section{Comparaison avec l'existant et complexité}
+
+The closest string problem, NP-hard, \cite{lanctot2003distinguishing}
+
+réduc min max -> min sum?
+
+notre cas avec alphabet binaire et chaines de 7 caractères.
+
+\section{Algorithme}
+
+Calcul de la matrice de distance, voir Tableau \ref{matrice-distances}.
+
+\begin{table}[!ht]
+    \begin{center}
+        \begin{tabular}{|c|cccccccc|}
+            \hline
+            & 000 & 001 & 010 & 011 & 100 & 101 & 110 & 111\\
+            \hline
+            000 & 0 & 1 &   1 &   2 &   1 &   2 &   2 &   3\\
+            001 & 1 & 0 &   2 &   1 &   2 &   1 &   3 &   2\\
+            010 & 1 & 2 &   0 &   1 &   2 &   3 &   1 &   2\\
+            011 & 2 & 1 &   1 &   0 &   3 &   2 &   2 &   1\\
+            100 & 1 & 2 &   2 &   3 &   0 &   1 &   1 &   2\\
+            101 & 2 & 1 &   3 &   2 &   1 &   0 &   2 &   1\\
+            110 & 2 & 3 &   1 &   2 &   1 &   2 &   0 &   1\\
+            111 & 3 & 2 &   2 &   1 &   2 &   1 &   1 &   0\\
+            \hline
+        \end{tabular}
+        \caption{Matrice de distance pour les chaînes de 3 caractères}
+    \label{matrice-distances}
+    \end{center}
+\end{table}
+
+Création du vecteur de poid, évaluation d'une solution, brut force sur
+les patterns.
+
+exemple avec 011 101 110 -> 111
+
+\section{Conclusions et perspectives}
+
+conclusions
+
+perspectives: Plusieurs patterns, Gestion des semaines partielles aux
+bords.
+
+\bibliographystyle{plain}
+\bibliography{pinot2015presenter}
+
+\end{document}
