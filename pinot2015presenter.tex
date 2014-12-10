@@ -2,26 +2,26 @@
 
 \begin{document}
 
-\title{Présenter une~liste~de~dates de~manière~lisible: complexité~et~algorithmes}
+\title{PrÃ©senter une~liste~de~dates de~maniÃ¨re~lisible: complexitÃ©~et~algorithmes}
 
 % Le titre court
-\def\shorttitle{Présenter une~liste~de~dates de~manière~lisible}
+\def\shorttitle{PrÃ©senter une~liste~de~dates de~maniÃ¨re~lisible}
 
-% Les auteurs et leur numéro d'affiliation
+% Les auteurs et leur numÃ©ro d'affiliation
 \author{Guillaume Pinot\inst{1}}
 
-% Les affiliations (par ordre croissant des numéros d'affiliation) séparées par \and
+% Les affiliations (par ordre croissant des numÃ©ros d'affiliation) sÃ©parÃ©es par \and
 \institute{
   Canal TP, 20 rue Hector Malot, 75012 Paris\\
   \email{guillaume.pinot@canaltp.fr}
 }
 
-% Création de la page de titre
+% CrÃ©ation de la page de titre
 \maketitle
 \thispagestyle{empty}
 
-% Les mots-clés
-\keywords{recherche opérationnelle, optimisation.}
+% Les mots-clÃ©s
+\keywords{recherche opÃ©rationnelle, optimisation.}
 
 
 \section{Introduction}
@@ -31,22 +31,22 @@ Canal TP
 navitia et navitia.io
 
 Dans navitia, nous fournissons les dates auxquelles circulent les
-véhicules.  Or, une liste de dates est peu lisible par un humain. Nous
-avons donc besoin de décrire sous forme condensé cette liste de dates.
+vÃ©hicules.  Or, une liste de dates est peu lisible par un humain. Nous
+avons donc besoin de dÃ©crire sous forme condensÃ© cette liste de dates.
 
-\section{Le problème}
+\section{Le problÃ¨me}
 
-\subsection{Description du problème}
+\subsection{Description du problÃ¨me}
 
-En entrée du problème, nous avons donc une liste de dates.  En sortie,
-nous voulons écrire une phrase du genre \emph{du Lundi au Vendredi du
+En entrÃ©e du problÃ¨me, nous avons donc une liste de dates.  En sortie,
+nous voulons Ã©crire une phrase du genre \emph{du Lundi au Vendredi du
   27 avril au 31 mai 2015 sauf les 1, 8, 14 et 25 mai et le 30 mai}.
 
-Notre résultat à notre problème doit donc décrire notre liste de dates
+Notre rÃ©sultat Ã  notre problÃ¨me doit donc dÃ©crire notre liste de dates
 avec:
 \begin{itemize}
 \item un rythme hebdomadaire (ex: du Lundi au Vendredi);
-\item une période de validité (ex: du 27 avril au 31 mai);
+\item une pÃ©riode de validitÃ© (ex: du 27 avril au 31 mai);
 \item une liste de date excluses (ex: sauf les 1, 8, 14 et 25 mai);
 \item une liste de dates incluses (ex: et le 6 mai).
 \end{itemize}
@@ -55,7 +55,7 @@ Pour que notre description soit le plus simple possible, il faut
 minimiser le nombre d'exceptions (les dates excluses et incluses).
 
 Nous pouvons facilement transformer la liste de dates en succession de
-rythmes hebdomadaire. Pour notre exemple, cela donnerait:
+rythmes hebdomadaires. Pour notre exemple, cela donnerait:
 \begin{itemize}
 \item Semaines du 27 avril et du 4 mai: Du Lundi au Jeudi;
 \item Semaine du 11 mai: Du Lundi au Vendredi sauf Jeudi;
@@ -63,25 +63,25 @@ rythmes hebdomadaire. Pour notre exemple, cela donnerait:
 \item Semaine du 25 mai: Du Mardi au Samedi.
 \end{itemize}
 
-Pour un rythme hebdomadaire donnée, il est facile de généré notre
-résultat.  Le problème est donc de trouver le rythme hebdomadaire
+Pour un rythme hebdomadaire donnÃ©, il est facile de gÃ©nÃ©rÃ© notre
+rÃ©sultat.  Le problÃ¨me est donc de trouver le rythme hebdomadaire
 journalier tel que le nombre d'exceptions soit minimal.
 
-\subsection{Modélisation mathématiques}
+\subsection{ModÃ©lisation mathÃ©matiques}
 
-rythme hebdomadaire -> chaînes de 0 et 1
+rythme hebdomadaire -> chaÃ®nes de 0 et 1
 
 distance de Hamming
 
-modèle
+modÃ¨le
 
-\section{Comparaison avec l'existant et complexité}
+\section{Comparaison avec l'existant et complexitÃ©}
 
 The closest string problem, NP-hard, \cite{lanctot2003distinguishing}
 
-réduc min max -> min sum?
+rÃ©duc min max -> min sum?
 
-notre cas avec alphabet binaire et chaines de 7 caractères.
+notre cas avec alphabet binaire et chaines de 7 caractÃ¨res.
 
 \section{Algorithme}
 
@@ -103,12 +103,12 @@ Calcul de la matrice de distance, voir Tableau \ref{matrice-distances}.
             111 & 3 & 2 &   2 &   1 &   2 &   1 &   1 &   0\\
             \hline
         \end{tabular}
-        \caption{Matrice de distance pour les chaînes de 3 caractères}
+        \caption{Matrice de distance pour les chaÃ®nes de 3 caractÃ¨res}
     \label{matrice-distances}
     \end{center}
 \end{table}
 
-Création du vecteur de poid, évaluation d'une solution, brut force sur
+CrÃ©ation du vecteur de poids, Ã©valuation d'une solution, brut force sur
 les patterns.
 
 exemple avec 011 101 110 -> 111
